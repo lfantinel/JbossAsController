@@ -19,6 +19,7 @@ import org.jboss.dmr.ModelType;
 
 import br.com.fantinel.jboss.as.controller.values.Driver;
 import br.com.fantinel.jboss.as.controller.values.FlushStrategy;
+import br.com.fantinel.jboss.as.controller.values.IDriver;
 import br.com.fantinel.jboss.as.controller.values.IsolationLevel;
 
 public class JndiDatasourceHelper implements JndiDataSourceProperties {
@@ -35,7 +36,7 @@ public class JndiDatasourceHelper implements JndiDataSourceProperties {
 		String connectionUrl = ds.getConnectionUrl();
 		if (isDefined(connectionUrl)) node.get(CONNECTION_URL).set(connectionUrl);
 
-		Driver driver = ds.getDriver();
+		IDriver driver = ds.getDriver();
 		if (isDefined(driver)) node.get(DRIVER_NAME).set(driver.name());
 
 		IsolationLevel level = ds.getIsolationLevel();
@@ -138,7 +139,7 @@ public class JndiDatasourceHelper implements JndiDataSourceProperties {
 		if (isDefined(jndiName)) ds.setJndiName(jndiName);
 		
 		final String driverName = getString(node, DRIVER_NAME);
-		final Driver driver = findByName(driverName, Driver.class);
+		final IDriver driver = findByName(driverName, Driver.class);
 		if (isDefined(driver)) ds.setDriver(driver);
 
 		String connectionUrl = getString(node, CONNECTION_URL, "");
@@ -279,6 +280,18 @@ public class JndiDatasourceHelper implements JndiDataSourceProperties {
 	}
 	
 	private static void _merge(List<ModelNode> operations, ModelNode address, String name, Enum<?> origValue, Enum<?> newValue) {
+		if (!Objects.equals(origValue, newValue)) {
+			ModelNode op;
+			if (isDefined(newValue)) {
+				op = createWriteAttributeOperation(address, name, newValue.name());
+			} else {
+				op = createUndefineAttributeOperation(address, name);
+			}
+			operations.add(op);
+		}
+	}
+	
+	private static void _merge(List<ModelNode> operations, ModelNode address, String name, IDriver origValue, IDriver newValue) {
 		if (!Objects.equals(origValue, newValue)) {
 			ModelNode op;
 			if (isDefined(newValue)) {

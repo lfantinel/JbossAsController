@@ -5,8 +5,8 @@ import static br.com.fantinel.jboss.as.controller.model.JndiDataSourceProperties
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import br.com.fantinel.jboss.as.controller.values.Driver;
 import br.com.fantinel.jboss.as.controller.values.FlushStrategy;
+import br.com.fantinel.jboss.as.controller.values.IDriver;
 import br.com.fantinel.jboss.as.controller.values.IsolationLevel;
 
 public class JndiDatasource implements Comparable<JndiDatasource> {
@@ -14,7 +14,7 @@ public class JndiDatasource implements Comparable<JndiDatasource> {
 	private String poolName;
 	private int position;
 	private boolean enabled;
-	private Driver driver;
+	private IDriver driver;
 	private String jndiName;
 	private String url;
 	private Integer port;
@@ -82,11 +82,11 @@ public class JndiDatasource implements Comparable<JndiDatasource> {
 		this.enabled = enabled;
 	}
 
-	public final Driver getDriver() {
+	public final IDriver getDriver() {
 		return driver;
 	}
 
-	public final void setDriver(Driver driver) {
+	public final void setDriver(IDriver driver) {
 		this.driver = driver;
 	}
 

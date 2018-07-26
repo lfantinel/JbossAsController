@@ -42,7 +42,7 @@ import br.com.fantinel.jboss.as.controller.exceptions.DatasourceDisabledExceptio
 import br.com.fantinel.jboss.as.controller.model.JndiDatasource;
 import br.com.fantinel.jboss.as.controller.model.JndiDatasourceHelper;
 import br.com.fantinel.jboss.as.controller.model.ProductInfo;
-import br.com.fantinel.jboss.as.controller.values.Driver;
+import br.com.fantinel.jboss.as.controller.values.IDriver;
 
 /**
  * This control was inspired by:
@@ -289,7 +289,7 @@ public class JbossAsController {
 		}
 	}
 
-	public boolean isDriverExists(Driver driver) {
+	public boolean isDriverExists(IDriver driver) {
 		final ModelNode address = new ModelNode();
 		address.add(SUBSYSTEM, DATASOURCES);
 		address.add(JDBC_DRIVER, driver.name());
@@ -325,7 +325,7 @@ public class JbossAsController {
 		}
 	}
 
-	public void addDriver(Driver driver) throws IOException {
+	public void addDriver(IDriver driver) throws IOException {
 		final ModelNode address = new ModelNode();
 		address.add(SUBSYSTEM, DATASOURCES);
 		address.add(JDBC_DRIVER, driver.name());
@@ -333,13 +333,13 @@ public class JbossAsController {
 		
 		ModelNode operation = createAddOperation(address);
 		operation.get(DRIVER_NAME).set(driver.name());
-		operation.get(DRIVER_MODULE_NAME).set(driver.module);
-		operation.get(DRIVER_XA_DATASOURCE_CLASS_NAME).set(driver.className);
+		operation.get(DRIVER_MODULE_NAME).set(driver.getModule());
+		operation.get(DRIVER_XA_DATASOURCE_CLASS_NAME).set(driver.getClassName());
 		
 		executeController(operation);
 	}
 	
-	public void removeDriver(Driver driver) throws IOException {
+	public void removeDriver(IDriver driver) throws IOException {
 		final ModelNode address = new ModelNode();
 		address.add(SUBSYSTEM, DATASOURCES);
 		address.add(JDBC_DRIVER, driver.name());
