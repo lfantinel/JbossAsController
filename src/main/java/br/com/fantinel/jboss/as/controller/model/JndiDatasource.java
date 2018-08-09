@@ -5,6 +5,7 @@ import static br.com.fantinel.jboss.as.controller.model.JndiDataSourceProperties
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import br.com.fantinel.jboss.as.controller.values.Driver;
 import br.com.fantinel.jboss.as.controller.values.FlushStrategy;
 import br.com.fantinel.jboss.as.controller.values.IDriver;
 import br.com.fantinel.jboss.as.controller.values.IsolationLevel;
@@ -14,7 +15,8 @@ public class JndiDatasource implements Comparable<JndiDatasource> {
 	private String poolName;
 	private int position;
 	private boolean enabled;
-	private IDriver driver;
+	private Driver driver;
+	private IDriver customDriver;
 	private String jndiName;
 	private String url;
 	private Integer port;
@@ -82,12 +84,20 @@ public class JndiDatasource implements Comparable<JndiDatasource> {
 		this.enabled = enabled;
 	}
 
-	public final IDriver getDriver() {
+	public final Driver getDriver() {
 		return driver;
 	}
 
-	public final void setDriver(IDriver driver) {
+	public final void setDriver(Driver driver) {
 		this.driver = driver;
+	}
+	
+	public IDriver getCustomDriver() {
+		return customDriver;
+	}
+	
+	public void setCustomDriver(IDriver customDriver) {
+		this.customDriver = customDriver;
 	}
 
 	public final String getJndiName() {
@@ -307,14 +317,27 @@ public class JndiDatasource implements Comparable<JndiDatasource> {
 	
 	public String getConnectionUrl() {
 		if (driver != null) {
-			return driver.getUrl(url, port, databaseName);
+			switch (driver) {
+			case Custom:
+				return customDriver != null ? customDriver.getUrl(url, port, databaseName) : "";
+			default:
+				return driver.getUrl(url, port, databaseName);
+			}
 		}
 		return "";
 	}
 
 	public void setConnectionUrl(String connectionUrl) {
-		if (driver != null) {			
-			String[] v = driver.parseUrl(connectionUrl);
+		if (driver != null) {
+			String[] v = null;
+			switch (driver) {
+			case Custom:
+				if (customDriver != null) v = customDriver.parseUrl(connectionUrl);
+				break;
+			default:
+				v = driver.parseUrl(connectionUrl);
+				break;
+			}
 			if (v != null && v.length >= 3) {			
 				this.url = v[0];
 				this.port = Integer.valueOf(v[1]);

@@ -139,7 +139,7 @@ public class JndiDatasourceHelper implements JndiDataSourceProperties {
 		if (isDefined(jndiName)) ds.setJndiName(jndiName);
 		
 		final String driverName = getString(node, DRIVER_NAME);
-		final IDriver driver = findByName(driverName, Driver.class);
+		final Driver driver = findByName(driverName, Driver.class);
 		if (isDefined(driver)) ds.setDriver(driver);
 
 		String connectionUrl = getString(node, CONNECTION_URL, "");
@@ -291,15 +291,15 @@ public class JndiDatasourceHelper implements JndiDataSourceProperties {
 		}
 	}
 	
-	private static void _merge(List<ModelNode> operations, ModelNode address, String name, IDriver origValue, IDriver newValue) {
-		if (!Objects.equals(origValue, newValue)) {
-			ModelNode op;
-			if (isDefined(newValue)) {
-				op = createWriteAttributeOperation(address, name, newValue.name());
-			} else {
-				op = createUndefineAttributeOperation(address, name);
-			}
-			operations.add(op);
-		}
-	}
+//	private static void _merge(List<ModelNode> operations, ModelNode address, String name, IDriver origValue, IDriver newValue) {
+//		if (!Objects.equals(origValue, newValue)) {
+//			ModelNode op;
+//			if (isDefined(newValue)) {
+//				op = createWriteAttributeOperation(address, name, newValue.name());
+//			} else {
+//				op = createUndefineAttributeOperation(address, name);
+//			}
+//			operations.add(op);
+//		}
+//	}
 }

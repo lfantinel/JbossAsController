@@ -17,7 +17,9 @@ public enum Driver implements IDriver {
 	
 	Progress   (7, 3001, "com.progress"   ,"com.progress.sql.jdbc.JdbcProgressDriver"    ,"jdbc:jdbcprogress:T:{url}:{port}:{database}"),
 	
-	Sybase     (8, 5000, "com.sybase"     ,"com.sybase.jdbc.SybDriver"                   ,"jdbc:sybase:Tds:{url}:{port}/{database}?JCONNECT_VERSION=6");
+	Sybase     (8, 5000, "com.sybase"     ,"com.sybase.jdbc.SybDriver"                   ,"jdbc:sybase:Tds:{url}:{port}/{database}?JCONNECT_VERSION=6"),
+	
+	Custom     (-1, 0, null, null, null);
 	
 	private final int id;
 	private final String jdbcUrlPattern;

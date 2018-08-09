@@ -83,10 +83,10 @@ public class JbossAsController {
 		this.password = password;
 	}
 
-	public void addDataSources(JndiDatasource ds, String name) throws IOException {
+	public void addDataSources(JndiDatasource ds) throws IOException {
 		final ModelNode address = new ModelNode();
 		address.add(SUBSYSTEM, DATASOURCES);
-		address.add(DATA_SOURCE, name);
+		address.add(DATA_SOURCE, ds.getPoolName());
 		address.protect();
 		final ModelNode addDataSouorceStep = createAddOperation(address);
 		setNodeValues(addDataSouorceStep, ds);
@@ -108,13 +108,13 @@ public class JbossAsController {
 		executeController(cop);
 	}
 	
-	public void updateDataSources(JndiDatasource ds, String name) throws IOException {
-		final JndiDatasource orig = getDatasourceByName(name);
+	public void updateDataSources(JndiDatasource ds) throws IOException {
+		final JndiDatasource orig = getDatasourceByName(ds.getPoolName());
 		
 		if (!Objects.equals(orig, ds)) {
 			final ModelNode address = new ModelNode();
 			address.add(SUBSYSTEM, DATASOURCES);
-			address.add(DATA_SOURCE, name);
+			address.add(DATA_SOURCE, ds.getPoolName());
 			address.protect();
 			
 			if (orig.getConnectionProperties() != null) {
@@ -151,12 +151,12 @@ public class JbossAsController {
 		}
 	}
 	
-	public void storeDataSources(JndiDatasource ds, String name) throws IOException {
-		boolean exist = isDatasourceExists(name);
+	public void storeDataSources(JndiDatasource ds) throws IOException {
+		boolean exist = isDatasourceExists(ds.getPoolName());
 		if (!exist) {
-			this.addDataSources(ds, name);
+			this.addDataSources(ds);
 		} else {
-			this.updateDataSources(ds, name);
+			this.updateDataSources(ds);
 		}
 	}
 	

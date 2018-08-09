@@ -86,7 +86,7 @@ public class ControllerTest {
 		boolean exist = ctrl.isDatasourceExists(DSNAME);
 		if (exist) ctrl.removeDatasource(DSNAME);
 		
-		ctrl.addDataSources(ds, DSNAME);
+		ctrl.addDataSources(ds);
 		exist = ctrl.isDatasourceExists(DSNAME);
 		assertTrue(exist);
 		
@@ -99,7 +99,7 @@ public class ControllerTest {
 		ds.setTag("TAG2");
 		ds.putConnectionProperty("description", null);
 		ds.putConnectionProperty("newProperty", "The Value");
-		ctrl.updateDataSources(ds, DSNAME);
+		ctrl.updateDataSources(ds);
 		JndiDatasource tmp = ctrl.getDatasourceByName(DSNAME);
 		assertEquals(ds, tmp);
 		
