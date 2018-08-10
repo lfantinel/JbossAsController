@@ -1,7 +1,5 @@
 package br.com.fantinel.jboss.as.controller.model;
 
-import static br.com.fantinel.jboss.as.controller.model.JndiDataSourceProperties.TAG;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -55,6 +53,8 @@ public class JndiDatasource implements Comparable<JndiDatasource> {
 	private IsolationLevel isolationLevel;
 	private FlushStrategy flushStrategy;
 	
+	private String tag;
+	
 	private LinkedHashMap<String, Object> connectionProperties;
 
 	public JndiDatasource() {
@@ -77,7 +77,7 @@ public class JndiDatasource implements Comparable<JndiDatasource> {
 	}
 
 	public boolean isEnabled() {
-		return enabled;
+		return enabled; 
 	}
 
 	public void setEnabled(boolean enabled) {
@@ -307,12 +307,11 @@ public class JndiDatasource implements Comparable<JndiDatasource> {
 	}
 	
 	public String getTag() {
-		Object tag = getConnectionProperty(TAG);
-		return (String) (tag != null ? tag : null);
+		return tag;
 	}
 	
 	public void setTag(String tag) {
-		this.putConnectionProperty(TAG, tag);
+		this.tag = tag;
 	}
 	
 	public String getConnectionUrl() {

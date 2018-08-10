@@ -106,7 +106,7 @@ public enum Driver implements IDriver {
 		return new File(jbossRoot, module.replaceAll("\\.", "/")+"/main");
 	}
 
-	public static IDriver findByid(int id) {
+	public static Driver findByid(int id) {
 		for (Driver v : values()) {
 			if (v.id == id) return v;
 		}
