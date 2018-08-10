@@ -107,28 +107,33 @@ public class JndiDatasourceHelper implements JndiDataSourceProperties {
 			List<ModelNode> list = properties.asList();
 			for (ModelNode propertyNode : list) {
 				final String name = propertyNode.asProperty().getName();
-				final Object value;
 				final ModelNode property = propertyNode.get(0);
-				final ModelType type = property.getType();
-				switch (type) {
-				case BOOLEAN:
-					value = property.get(VALUE).asBoolean();
-					break;
-				case DOUBLE:
-					value = property.get(VALUE).asDouble();
-					break;
-				case INT:
-					value = property.get(VALUE).asInt();
-					break;
-				case UNDEFINED:
-					value = null;
-					break;
-				case STRING:					
-				default:
-					value = property.get(VALUE).asString();
-					break;
+				if (TAG.equals(name)) {
+					ds.setTag(property.get(VALUE).asString());
+				} else {					
+					final Object value;
+					final ModelType type = property.getType();
+					switch (type) {
+					case BOOLEAN:
+						value = property.get(VALUE).asBoolean();
+						break;
+					case DOUBLE:
+						value = property.get(VALUE).asDouble();
+						break;
+					case INT:
+						value = property.get(VALUE).asInt();
+						break;
+					case UNDEFINED:
+						value = null;
+						break;
+					case STRING:					
+					default:
+						value = property.get(VALUE).asString();
+						break;
+					}
+					ds.putConnectionProperty(name, value);
 				}
-				ds.putConnectionProperty(name, value);
+				
 			}
 		}
 		

@@ -2,6 +2,7 @@ package br.com.fantinel.jboss.as.controller;
 
 import static br.com.fantinel.jboss.as.controller.model.JndiDataSourceProperties.CONNECTION_PROPERTIES;
 import static br.com.fantinel.jboss.as.controller.model.JndiDataSourceProperties.ENABLED;
+import static br.com.fantinel.jboss.as.controller.model.JndiDataSourceProperties.TAG;
 import static br.com.fantinel.jboss.as.controller.model.JndiDatasourceHelper.getDatasource;
 import static br.com.fantinel.jboss.as.controller.model.JndiDatasourceHelper.setNodeValues;
 import static java.util.Arrays.binarySearch;
@@ -94,6 +95,12 @@ public class JbossAsController {
 		ModelNode cop = Operations.createCompositeOperation();
 		cop.get(STEPS).add(addDataSouorceStep);
 		
+		String tag = ds.getTag();
+		if (tag != null && tag.trim().length() > 0) {
+			ModelNode addPropertyStep = createAddPropertyOperation(address, TAG, tag);
+			cop.get(STEPS).add(addPropertyStep);
+		}
+		
 		Map<String, Object> connectionProperties = ds.getConnectionProperties();
 		if (connectionProperties != null) {
 			Set<Entry<String, Object>> set = connectionProperties.entrySet();
@@ -129,6 +136,12 @@ public class JbossAsController {
 			}
 			
 			List<ModelNode> operations = JndiDatasourceHelper.merge(address, orig, ds);
+			
+			String tag = ds.getTag();
+			if (tag != null && tag.trim().length() > 0) {
+				ModelNode op = createAddPropertyOperation(address, TAG, tag);
+				operations.add(op);
+			}
 			
 			if (ds.getConnectionProperties() != null) {
 				ModelNode op;
