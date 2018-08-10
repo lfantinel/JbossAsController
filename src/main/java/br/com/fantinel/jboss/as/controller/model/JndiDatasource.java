@@ -76,19 +76,19 @@ public class JndiDatasource implements Comparable<JndiDatasource> {
 		this.position = position;
 	}
 
-	public final boolean isEnabled() {
+	public boolean isEnabled() {
 		return enabled;
 	}
 
-	public final void setEnabled(boolean enabled) {
+	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 
-	public final Driver getDriver() {
+	public Driver getDriver() {
 		return driver;
 	}
 
-	public final void setDriver(Driver driver) {
+	public void setDriver(Driver driver) {
 		this.driver = driver;
 	}
 	
@@ -100,171 +100,171 @@ public class JndiDatasource implements Comparable<JndiDatasource> {
 		this.customDriver = customDriver;
 	}
 
-	public final String getJndiName() {
+	public String getJndiName() {
 		return jndiName;
 	}
 
-	public final void setJndiName(String jndiName) {
+	public void setJndiName(String jndiName) {
 		this.jndiName = jndiName;
 	}
 
-	public final String getUrl() {
+	public String getUrl() {
 		return url;
 	}
 
-	public final void setUrl(String url) {
+	public void setUrl(String url) {
 		this.url = url;
 	}
 
-	public final Integer getPort() {
+	public Integer getPort() {
 		return port;
 	}
 
-	public final void setPort(Integer port) {
+	public void setPort(Integer port) {
 		this.port = port;
 	}
 
-	public final String getDatabaseName() {
+	public String getDatabaseName() {
 		return databaseName;
 	}
 
-	public final void setDatabaseName(String databaseName) {
+	public void setDatabaseName(String databaseName) {
 		this.databaseName = databaseName;
 	}
 
-	public final String getUserName() {
+	public String getUserName() {
 		return userName;
 	}
 
-	public final void setUserName(String userName) {
+	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
-	public final String getPassword() {
+	public String getPassword() {
 		return password;
 	}
 
-	public final void setPassword(String password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public final boolean isBackgroundValidation() {
+	public boolean isBackgroundValidation() {
 		return backgroundValidation;
 	}
 
-	public final void setBackgroundValidation(boolean backgroundValidation) {
+	public void setBackgroundValidation(boolean backgroundValidation) {
 		this.backgroundValidation = backgroundValidation;
 	}
 
-	public final String getCheckValidConnectionSql() {
+	public String getCheckValidConnectionSql() {
 		return checkValidConnectionSql;
 	}
 
-	public final void setCheckValidConnectionSql(String checkValidConnectionSql) {
+	public void setCheckValidConnectionSql(String checkValidConnectionSql) {
 		this.checkValidConnectionSql = checkValidConnectionSql;
 	}
 
-	public final Integer getBackgroundValidationMilis() {
+	public Integer getBackgroundValidationMilis() {
 		return backgroundValidationMilis;
 	}
 
-	public final void setBackgroundValidationMilis(Integer backgroundValidationMilis) {
+	public void setBackgroundValidationMilis(Integer backgroundValidationMilis) {
 		this.backgroundValidationMilis = backgroundValidationMilis;
 	}
 
-	public final Integer getInitialPoolSize() {
+	public Integer getInitialPoolSize() {
 		return initialPoolSize;
 	}
 
-	public final void setInitialPoolSize(Integer initialPoolSize) {
+	public void setInitialPoolSize(Integer initialPoolSize) {
 		this.initialPoolSize = initialPoolSize;
 	}
 
-	public final Integer getMinPoolSize() {
+	public Integer getMinPoolSize() {
 		return minPoolSize;
 	}
 
-	public final void setMinPoolSize(Integer minPoolSize) {
+	public void setMinPoolSize(Integer minPoolSize) {
 		this.minPoolSize = minPoolSize;
 	}
 
-	public final Integer getMaxPoolSize() {
+	public Integer getMaxPoolSize() {
 		return maxPoolSize;
 	}
 
-	public final void setMaxPoolSize(Integer maxPoolSize) {
+	public void setMaxPoolSize(Integer maxPoolSize) {
 		this.maxPoolSize = maxPoolSize;
 	}
 
-	public final boolean isPrefill() {
+	public boolean isPrefill() {
 		return prefill;
 	}
 
-	public final void setPrefill(boolean prefill) {
+	public void setPrefill(boolean prefill) {
 		this.prefill = prefill;
 	}
 
-	public final String getSecurityDomain() {
+	public String getSecurityDomain() {
 		return securityDomain;
 	}
 
-	public final void setSecurityDomain(String securityDomain) {
+	public void setSecurityDomain(String securityDomain) {
 		this.securityDomain = securityDomain;
 	}
 
-	public final boolean isJta() {
+	public boolean isJta() {
 		return jta;
 	}
 
-	public final void setJta(boolean jta) {
+	public void setJta(boolean jta) {
 		this.jta = jta;
 	}
 
-	public final boolean isUseJavaContext() {
+	public boolean isUseJavaContext() {
 		return useJavaContext;
 	}
 
-	public final void setUseJavaContext(boolean useJavaContext) {
+	public void setUseJavaContext(boolean useJavaContext) {
 		this.useJavaContext = useJavaContext;
 	}
 
-	public final Integer getPstmtCacheSize() {
+	public Integer getPstmtCacheSize() {
 		return pstmtCacheSize;
 	}
 
-	public final void setPstmtCacheSize(Integer pstmtCacheSize) {
+	public void setPstmtCacheSize(Integer pstmtCacheSize) {
 		this.pstmtCacheSize = pstmtCacheSize;
 	}
 
-	public final boolean isSharePstmt() {
+	public boolean isSharePstmt() {
 		return sharePstmt;
 	}
 
-	public final void setSharePstmt(boolean sharePstmt) {
+	public void setSharePstmt(boolean sharePstmt) {
 		this.sharePstmt = sharePstmt;
 	}
 
-	public final Integer getIdleTimeoutMinutes() {
+	public Integer getIdleTimeoutMinutes() {
 		return idleTimeoutMinutes;
 	}
 
-	public final void setIdleTimeoutMinutes(Integer idleTimeoutMinutes) {
+	public void setIdleTimeoutMinutes(Integer idleTimeoutMinutes) {
 		this.idleTimeoutMinutes = idleTimeoutMinutes;
 	}
 
-	public final Integer getQueryTimeout() {
+	public Integer getQueryTimeout() {
 		return queryTimeout;
 	}
 
-	public final void setQueryTimeout(Integer queryTimeout) {
+	public void setQueryTimeout(Integer queryTimeout) {
 		this.queryTimeout = queryTimeout;
 	}
 
-	public final Integer getBlockingTimeoutMililis() {
+	public Integer getBlockingTimeoutMililis() {
 		return blockingTimeoutMililis;
 	}
 
-	public final void setBlockingTimeoutMililis(Integer blockingTimeoutMililis) {
+	public void setBlockingTimeoutMililis(Integer blockingTimeoutMililis) {
 		this.blockingTimeoutMililis = blockingTimeoutMililis;
 	}
 	
