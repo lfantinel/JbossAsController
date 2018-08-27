@@ -43,6 +43,7 @@ import br.com.fantinel.jboss.as.controller.exceptions.DatasourceDisabledExceptio
 import br.com.fantinel.jboss.as.controller.model.JndiDatasource;
 import br.com.fantinel.jboss.as.controller.model.JndiDatasourceHelper;
 import br.com.fantinel.jboss.as.controller.model.ProductInfo;
+import br.com.fantinel.jboss.as.controller.values.Flush;
 import br.com.fantinel.jboss.as.controller.values.IDriver;
 
 /**
@@ -336,6 +337,14 @@ public class JbossAsController {
 			try {Thread.sleep(3000);
 			} catch (InterruptedException e) {}
 		}
+	}
+	
+	public void flushConnection(String name, Flush type) throws IOException {
+		final ModelNode address = new ModelNode();
+		address.add(SUBSYSTEM, DATASOURCES);
+		address.add(DATA_SOURCE, name);
+		address.protect();
+		executeController(createOperation(type.op, address));
 	}
 
 	public void addDriver(IDriver driver) throws IOException {
